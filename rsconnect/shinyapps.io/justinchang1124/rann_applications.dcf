@@ -1,0 +1,13 @@
+name: rann_applications
+title: rann_applications
+username:
+account: justinchang1124
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3397497
+bundleId: 3985466
+url: https://justinchang1124.shinyapps.io/rann_applications/
+when: 1607921286.49214
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: Dataset1-Media-Example-EDGES.csv|Dataset1-Media-Example-NODES.csv|Dataset2-Media-User-Example-EDGES.csv|Dataset2-Media-User-Example-NODES.csv|Dataset3-Airlines-EDGES.csv|Dataset3-Airlines-NODES.csv|LICENSE|README.md
