@@ -6,27 +6,27 @@ library(shinyjs)
 library(ndtv)
 library(htmlwidgets)
 
-wheel <- network.initialize(10)
-
-for (i in 1:10)
-{
-  if (i == 1)
-    add.edges.active(wheel, tail=i, head=2:3, onset=i, terminus=11)
-  if (i > 1 && i < 10)
-    add.edges.active(wheel, tail=i, head=c(i-1, i+1), onset=i, terminus=11)
-  if (i == 10)
-    add.edges.active(wheel, tail=i, head=8:9, onset=i, terminus=11)
-}
-
-render.d3movie(wheel, vertex.tooltip = 1:10, vertex.cex = 1, edge.lwd = 3)
-
-
-# wheel <- network.initialize(10) # create a toy network
-# add.edges.active(wheel,tail=1:9,head=c(2:9,1),onset=1:9, terminus=11)
-# add.edges.active(wheel,tail=10,head=c(1:9),onset=10, terminus=12)
-plot(wheel) # peek at the static version
-render.animation(wheel) # compute and render
-ani.replay()
+# wheel <- network.initialize(10)
+# 
+# for (i in 1:10)
+# {
+#   if (i == 1)
+#     add.edges.active(wheel, tail=i, head=2:3, onset=i, terminus=11)
+#   if (i > 1 && i < 10)
+#     add.edges.active(wheel, tail=i, head=c(i-1, i+1), onset=i, terminus=11)
+#   if (i == 10)
+#     add.edges.active(wheel, tail=i, head=8:9, onset=i, terminus=11)
+# }
+# 
+# render.d3movie(wheel, vertex.tooltip = 1:10, vertex.cex = 1, edge.lwd = 3)
+# 
+# 
+# # wheel <- network.initialize(10) # create a toy network
+# # add.edges.active(wheel,tail=1:9,head=c(2:9,1),onset=1:9, terminus=11)
+# # add.edges.active(wheel,tail=10,head=c(1:9),onset=10, terminus=12)
+# plot(wheel) # peek at the static version
+# render.animation(wheel) # compute and render
+# ani.replay()
 
 # nodes <- read.csv("Dataset1-Media-Example-NODES.csv", header=T, as.is=T)
 # links <- read.csv("Dataset1-Media-Example-EDGES.csv", header=T, as.is=T)
@@ -150,7 +150,7 @@ ui <- function(request){
         id = 'plotPanels',
         tabPanel(
           title = "Example 1", 
-          uiOutput("example1_out")
+          uiOutput("example1_out") %>% my_spin()
         )
       )
     )
