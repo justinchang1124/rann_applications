@@ -5,75 +5,9 @@ library(shinycssloaders)
 library(shinyjs)
 library(ndtv)
 library(htmlwidgets)
+library(DT)
 
-# wheel <- network.initialize(10)
-# 
-# for (i in 1:10)
-# {
-#   if (i == 1)
-#     add.edges.active(wheel, tail=i, head=2:3, onset=i, terminus=11)
-#   if (i > 1 && i < 10)
-#     add.edges.active(wheel, tail=i, head=c(i-1, i+1), onset=i, terminus=11)
-#   if (i == 10)
-#     add.edges.active(wheel, tail=i, head=8:9, onset=i, terminus=11)
-# }
-# 
-# render.d3movie(wheel, vertex.tooltip = 1:10, vertex.cex = 1, edge.lwd = 3)
-# 
-# 
-# # wheel <- network.initialize(10) # create a toy network
-# # add.edges.active(wheel,tail=1:9,head=c(2:9,1),onset=1:9, terminus=11)
-# # add.edges.active(wheel,tail=10,head=c(1:9),onset=10, terminus=12)
-# plot(wheel) # peek at the static version
-# render.animation(wheel) # compute and render
-# ani.replay()
-
-# nodes <- read.csv("Dataset1-Media-Example-NODES.csv", header=T, as.is=T)
-# links <- read.csv("Dataset1-Media-Example-EDGES.csv", header=T, as.is=T)
-# 
-# net3 <- network(links,  vertex.attr=nodes, matrix.type="edgelist",
-#                 loops=F, multiple=F, ignore.eval = F)
-# 
-# vs <- data.frame(onset=0, terminus=50, vertex.id=1:17)
-# es <- data.frame(onset=1:49, terminus=50,
-#                  head=as.matrix(net3, matrix.type="edgelist")[,1],
-#                  tail=as.matrix(net3, matrix.type="edgelist")[,2])
-# 
-# net3.dyn <- networkDynamic(base.net=net3, edge.spells=es, vertex.spells=vs)
-# 
-# compute.animation(net3.dyn, animation.mode = "kamadakawai",
-#                   slice.par=list(start=0, end=50, interval=1,
-#                                  aggregate.dur=1, rule='any'))
-# 
-# color_seq <- function(n_colors)
-# {
-#   return(hcl(1:n_colors * (360/(n_colors+1))-15, 160, 60))
-# }
-# 
-# hmm <-as.numeric(as.factor(net3.dyn %v% "type.label"))
-# colors <- color_seq(length(unique(hmm)))[hmm]
-# 
-# saveRDS(colors, "colors.rds")
-
-# target <- render.d3movie(net3.dyn, usearrows = F,
-#                displaylabels = F, label=net3 %v% "media",
-#                bg="#ffffff", vertex.border="#333333",
-#                vertex.cex = degree(net3)/2,
-#                vertex.col = colors,
-#                edge.lwd = (net3.dyn %e% "weight")/3,
-#                edge.col = '#55555599',
-#                vertex.tooltip = paste("<b>Name:</b>", (net3.dyn %v% "media") , "<br>",
-#                                       "<b>Type:</b>", (net3.dyn %v% "type.label")),
-#                edge.tooltip = paste("<b>Edge type:</b>", (net3.dyn %e% "type"), "<br>",
-#                                     "<b>Edge weight:</b>", (net3.dyn %e% "weight" ) ),
-#                launchBrowser=T, filename="temp.html",
-#                render.par=list(tween.frames = 30, show.time = F),
-#                plot.par=list(mar=c(0,0,0,0)), output.mode='htmlWidget' )
-
-# saveRDS(target, "target.rds")
-
-target <- readRDS("target.rds")
-target$sizingPolicy$defaultWidth = "100%"
+all_data <- readRDS("all_data.rds")
 
 instructions <- "Hi! Instructions go here!"
 citations <- "Hi! Citations go here!"
@@ -91,6 +25,13 @@ action <- function(id, name, icon_name, color, bk, br)
 my_spin <- function(content)
 {
   content %>% withSpinner(type = 6)
+}
+
+neighbor_slider <- function(id, range)
+{
+  sliderInput(sprintf("neighbors_%s", id), sprintf(
+    "Number of Neighbors (Example %s)", id), 
+              min=range[1], max=range[2], value=ceiling(range[2]/4), step=1, ticks = FALSE)
 }
 
 my_css_styling <- HTML("
@@ -111,7 +52,30 @@ my_css_styling <- HTML("
   overflow-x: hidden !important; 
   overflow-y: hidden !important;
 }
+
+h3 {
+  text-align: center !important;
+}
 ")
+
+empty_df <- matrix(nrow=0, ncol=1) %>% data.frame()
+colnames(empty_df) <- "Unknown"
+
+# Creates a datatable from a data frame
+my_datatable <- function(df)
+{
+  if (class(df) != "data.frame" || ncol(df) < 1)
+    df <- empty_df
+  
+  datatable(
+    df, editable=FALSE, escape=TRUE, filter="top", 
+    selection="none", options=list(
+      scrollX=TRUE,
+      scrollY=TRUE,
+      autoWidth=FALSE
+    )
+  )
+}
 
 ui <- function(request){
   dashboardPage(
@@ -123,11 +87,30 @@ ui <- function(request){
         menuItem(
           "Settings",
           startExpanded = TRUE,
-          sliderInput("neighbors1", "Neighbors", 
-                      min=1, max=1000, value=20, step=1, ticks = FALSE),
-          sliderInput("iterations1", "Number of Iterations", 
-                      min=1, max=20, value=10, step=1, ticks = FALSE)
-          
+          conditionalPanel(
+            condition = "input.plotPanels == 'Example 1'",
+            neighbor_slider(1, c(1,ncol(all_data[[1]][["KNN"]])))
+          ),
+          conditionalPanel(
+            condition = "input.plotPanels == 'Example 2'",
+            neighbor_slider(2, c(1,ncol(all_data[[2]][["KNN"]])))
+          ),
+          conditionalPanel(
+            condition = "input.plotPanels == 'Example 3'",
+            neighbor_slider(3, c(1,ncol(all_data[[3]][["KNN"]])))
+          ),
+          conditionalPanel(
+            condition = "input.plotPanels == 'Example 4'",
+            neighbor_slider(4, c(1,ncol(all_data[[4]][["KNN"]])))
+          ),
+          conditionalPanel(
+            condition = "input.plotPanels == 'Example 5'",
+            neighbor_slider(5, c(1,ncol(all_data[[5]][["KNN"]])))
+          ),
+          conditionalPanel(
+            condition = "input.plotPanels == 'Example 6'",
+            neighbor_slider(6, c(1,ncol(all_data[[6]][["KNN"]])))
+          )
         )
       )
     ),
@@ -146,11 +129,53 @@ ui <- function(request){
       uiOutput("plainTitleUI"),
       tabBox(
         width="100%",
-        height = "800px",
         id = 'plotPanels',
         tabPanel(
           title = "Example 1", 
-          uiOutput("example1_out") %>% my_spin()
+          uiOutput("example1_out") %>% my_spin(),
+          h3("Nearest Neighbors"),
+          DT::DTOutput("example1_knn") %>% my_spin(),
+          h3("Raw Data"),
+          DT::DTOutput("example1_raw") %>% my_spin()
+        ),
+        tabPanel(
+          title = "Example 2", 
+          uiOutput("example2_out") %>% my_spin(),
+          h3("Nearest Neighbors"),
+          DT::DTOutput("example2_knn") %>% my_spin(),
+          h3("Raw Data"),
+          DT::DTOutput("example2_raw") %>% my_spin()
+        ),
+        tabPanel(
+          title = "Example 3", 
+          uiOutput("example3_out") %>% my_spin(),
+          h3("Nearest Neighbors"),
+          DT::DTOutput("example3_knn") %>% my_spin(),
+          DT::DTOutput("example3_raw") %>% my_spin()
+        ),
+        tabPanel(
+          title = "Example 4", 
+          uiOutput("example4_out") %>% my_spin(),
+          h3("Nearest Neighbors"),
+          DT::DTOutput("example4_knn") %>% my_spin(),
+          h3("Raw Data"),
+          DT::DTOutput("example4_raw") %>% my_spin()
+        ),
+        tabPanel(
+          title = "Example 5", 
+          uiOutput("example5_out") %>% my_spin(),
+          h3("Nearest Neighbors"),
+          DT::DTOutput("example5_knn") %>% my_spin(),
+          h3("Raw Data"),
+          DT::DTOutput("example5_raw") %>% my_spin()
+        ),
+        tabPanel(
+          title = "Example 6", 
+          uiOutput("example6_out") %>% my_spin(),
+          h3("Nearest Neighbors"),
+          DT::DTOutput("example6_knn") %>% my_spin(),
+          h3("Raw Data"),
+          DT::DTOutput("example6_raw") %>% my_spin()
         )
       )
     )
@@ -178,8 +203,82 @@ server <- function(input, output, session) {
     ))
   })
   
+  # 1
   output$example1_out <- renderUI({
+    div(all_data[[1]][["KNN"]])
+  })
+  
+  output$example1_knn <- renderDT({
+    my_datatable(empty_df)
+  })
+  
+  output$example1_raw <- renderDT({
+    my_datatable(empty_df)
+  })
+  
+  # 2
+  output$example2_out <- renderUI({
     div(target)
+  })
+  
+  output$example2_knn <- renderDT({
+    my_datatable(empty_df)
+  })
+  
+  output$example2_raw <- renderDT({
+    my_datatable(empty_df)
+  })
+  
+  # 3
+  output$example3_out <- renderUI({
+    div(target)
+  })
+  
+  output$example3_knn <- renderDT({
+    my_datatable(empty_df)
+  })
+  
+  output$example3_raw <- renderDT({
+    my_datatable(empty_df)
+  })
+  
+  # 4
+  output$example4_out <- renderUI({
+    div(target)
+  })
+  
+  output$example4_knn <- renderDT({
+    my_datatable(empty_df)
+  })
+  
+  output$example4_raw <- renderDT({
+    my_datatable(empty_df)
+  })
+  
+  # 5
+  output$example5_out <- renderUI({
+    div(target)
+  })
+  
+  output$example5_knn <- renderDT({
+    my_datatable(empty_df)
+  })
+  
+  output$example5_raw <- renderDT({
+    my_datatable(empty_df)
+  })
+  
+  # 6
+  output$example6_out <- renderUI({
+    div(target)
+  })
+  
+  output$example6_knn <- renderDT({
+    my_datatable(empty_df)
+  })
+  
+  output$example6_raw <- renderDT({
+    my_datatable(empty_df)
   })
 }
 
