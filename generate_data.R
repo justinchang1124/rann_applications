@@ -178,6 +178,16 @@ all_data[[7]][["Raw"]] <- read.csv("data/test.csv", sep=" ", header=FALSE)
 all_data[[7]][["KNN"]] <- make_knn(i0, d0)
 all_data[[7]][["D3M"]] <- make_animation(i0, 10, instant=FALSE)
 
+# EXAMPLE 2
+i2 <- open_result("data/i07_m30000_n0000100_k010.txt")
+i2 <- data.frame(matrix(i2, nrow=100, byrow=TRUE)[,1:10])
+d2 <- open_result("data/d07_m30000_n0000100_k010.txt")
+d2 <- data.frame(sqrt(matrix(d2, nrow=100, byrow=TRUE)[,1:10]))
+
+all_data[[2]][["Raw"]] <- NULL
+all_data[[2]][["KNN"]] <- make_knn(i2, d2)
+all_data[[2]][["D3M"]] <- make_animation(i3, 0, instant=FALSE, metadata=metadata)
+
 # EXAMPLE 3
 ed1 <- read.csv("data/entex_data.csv")[,-1]
 write.table(hmm, "~/rann_applications/entex_fin.csv", 
@@ -200,19 +210,5 @@ all_data[[3]][["D3M"]] <- make_animation(i3, 0, instant=FALSE, metadata=metadata
 
 
 
-
-
-
-
-all_data[[1]][["KNN"]] <- 
-  all_data[[1]][["D3M"]]
-
-for (i in 3:10)
-  all_data[[1]][["KNN"]][[i]] <- NULL
-
-for (i in 2:6)
-{
-  all_data[[i]] <- all_data[[1]]
-}
 
 saveRDS(all_data, "rann_app/data/all_data.rds")
