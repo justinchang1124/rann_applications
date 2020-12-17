@@ -1,0 +1,12 @@
+name: rann_app
+title: rann_app
+username:
+account: justinchang1124
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3410577
+bundleId: 3999574
+url: https://justinchang1124.shinyapps.io/rann_app/
+when: 1608173829.20551
+asMultiple: FALSE
+asStatic: FALSE

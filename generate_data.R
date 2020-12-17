@@ -1,133 +1,19 @@
 library(stringi)
 library(ndtv)
 library(htmlwidgets)
+library(dplyr)
 
-testflat <- rep(1:100, 100)
-test <- matrix(testflat, nrow=100)
-write.table(test, "~/rann_applications/test.csv", 
-            row.names = FALSE, col.names = FALSE, quote = FALSE)
+# ----------------
+# HELPER FUNCTIONS
+# ----------------
 
-make_animation <- function(data, num_neighbors)
-{
-  wheel <- network.initialize(nrow(data))
-  
-  for (i in 1:nrow(data))
-  {
-    add.edges.active(wheel, tail=i, head=as.numeric(data[i,1:num_neighbors]), 
-                     onset=i, terminus=nrow(data)+1)
-  }
-  
-  compute.animation(wheel, animation.mode = "kamadakawai",
-                    slice.par=list(start=0, end=nrow(data), interval=1,
-                                   aggregate.dur=1, rule='any'))
-  
-  knn <- render.d3movie(
-    wheel, 
-    vertex.tooltip = 1:nrow(data), 
-    vertex.cex = 1, 
-    edge.lwd = 3
-    ,output.mode='htmlWidget'
-  )
-  
-  knn$sizingPolicy$defaultWidth = "100%"
-  
-  knn
-}
-
-
-for (i in 1:10)
-{
-  if (i == 1)
-    add.edges.active(wheel, tail=i, head=2:3, onset=i, terminus=11)
-  if (i > 1 && i < 10)
-    add.edges.active(wheel, tail=i, head=c(i-1, i+1), onset=i, terminus=11)
-  if (i == 10)
-    add.edges.active(wheel, tail=i, head=8:9, onset=i, terminus=11)
-}
-
-# 
-# 
-# # wheel <- network.initialize(10) # create a toy network
-# # add.edges.active(wheel,tail=1:9,head=c(2:9,1),onset=1:9, terminus=11)
-# # add.edges.active(wheel,tail=10,head=c(1:9),onset=10, terminus=12)
-# plot(wheel) # peek at the static version
-# render.animation(wheel) # compute and render
-# ani.replay()
-
-# nodes <- read.csv("Dataset1-Media-Example-NODES.csv", header=T, as.is=T)
-# links <- read.csv("Dataset1-Media-Example-EDGES.csv", header=T, as.is=T)
-# 
-# net3 <- network(links,  vertex.attr=nodes, matrix.type="edgelist",
-#                 loops=F, multiple=F, ignore.eval = F)
-# 
-# vs <- data.frame(onset=0, terminus=50, vertex.id=1:17)
-# es <- data.frame(onset=1:49, terminus=50,
-#                  head=as.matrix(net3, matrix.type="edgelist")[,1],
-#                  tail=as.matrix(net3, matrix.type="edgelist")[,2])
-# 
-# net3.dyn <- networkDynamic(base.net=net3, edge.spells=es, vertex.spells=vs)
-# 
-# compute.animation(net3.dyn, animation.mode = "kamadakawai",
-#                   slice.par=list(start=0, end=50, interval=1,
-#                                  aggregate.dur=1, rule='any'))
-# 
-# color_seq <- function(n_colors)
-# {
-#   return(hcl(1:n_colors * (360/(n_colors+1))-15, 160, 60))
-# }
-# 
-# hmm <-as.numeric(as.factor(net3.dyn %v% "type.label"))
-# colors <- color_seq(length(unique(hmm)))[hmm]
-# 
-# saveRDS(colors, "colors.rds")
-
-# target <- render.d3movie(net3.dyn, usearrows = F,
-#                displaylabels = F, label=net3 %v% "media",
-#                bg="#ffffff", vertex.border="#333333",
-#                vertex.cex = degree(net3)/2,
-#                vertex.col = colors,
-#                edge.lwd = (net3.dyn %e% "weight")/3,
-#                edge.col = '#55555599',
-#                vertex.tooltip = paste("<b>Name:</b>", (net3.dyn %v% "media") , "<br>",
-#                                       "<b>Type:</b>", (net3.dyn %v% "type.label")),
-#                edge.tooltip = paste("<b>Edge type:</b>", (net3.dyn %e% "type"), "<br>",
-#                                     "<b>Edge weight:</b>", (net3.dyn %e% "weight" ) ),
-#                launchBrowser=T, filename="temp.html",
-#                render.par=list(tween.frames = 30, show.time = F),
-#                plot.par=list(mar=c(0,0,0,0)), output.mode='htmlWidget' )
-
-# saveRDS(target, "target.rds")
-
-target$sizingPolicy$defaultWidth = "100%"
-
+# creates an empty list
 my_empty_list <- function(names)
 {
   target <- vector(mode="list", length=length(names))
   names(target) <- names
   target
 }
-
-
-knn <- readLines("i07_m100_n0000100_k050_i005.txt")
-h2 <- repStr(knn, " ", "")
-h3 <- as.numeric(h2)
-h4 <- data.frame(matrix(h3, ncol=50, byrow = TRUE))
-
-all_data <- my_empty_list(sprintf("Example %s", 1:6))
-for (i in 1:6)
-{
-  all_data[[i]] <- my_empty_list(c("Raw", "KNN"))
-  
-  all_data[[i]][["Raw"]] <- read.csv("test.csv", sep=" ", header=FALSE)
-  all_data[[i]][["KNN"]] <- my_empty_list(sprintf("KNN%s", 1:20))
-  
-  for (j in 1:20)
-  {
-    all_data[[i]][["KNN"]][[j]] <- make_animation(data, j)
-  }
-}
-
-saveRDS(all_data, "rann_app/all_data.rds")
 
 # fixed pattern replacement in a vector of strings
 repStr <- function(x_stringi, pattern, replacement)
@@ -137,3 +23,196 @@ repStr <- function(x_stringi, pattern, replacement)
     replacement = replacement, 
     vectorize_all = FALSE)
 }
+
+# makes a sequence of colors
+color_seq <- function(n_colors)
+{
+  hcl(1:n_colors * (360/(n_colors+1))-15, 160, 60)
+}
+
+# makes colors for a vector
+make_colors <- function(vec)
+{
+  numbers <- as.numeric(as.factor(vec))
+  color_seq(length(unique(numbers)))[numbers]
+}
+
+# makes a grey sequence of colors
+grey_seq <- function(n)
+{
+  result <- NULL
+  for (i in 1:n-1)
+  {
+    result <- c(result, rgb(i/n, i/n, i/n, 1))
+  }
+  result
+}
+
+# makes grey for a vector
+make_grey <- function(vec)
+{
+  numbers <- as.numeric(as.factor(vec))
+  grey_seq(length(unique(numbers)))[numbers]
+}
+
+# opens a result from RANN
+open_result <- function(filename)
+{
+  readLines(filename) %>% repStr(" ", "") %>% as.numeric()
+}
+
+# makes KNN data
+make_knn <- function(indices, distances)
+{
+  mapply(function(a,b){
+    sprintf("I = %s, D = %s", a, b)}, indices, distances) %>% data.frame()
+}
+
+# ----------------
+# CREATE ANIMATION
+# ----------------
+
+# if instant, makes HTML
+# otherwise, makes an animation htmlWidget for R Shiny
+# min_dist: the minimum distance between graph edges
+make_animation <- function(indices, 
+                           # distances, 
+                           min_dist = 10, instant=TRUE, metadata=NULL)
+{
+  # if (nrow(indices) != nrow(distances) || ncol(indices) != ncol(distances))
+  # {
+  #   print("Error: Indices and distances are of incorrect dimension.")
+  #   return()
+  # }
+  
+  # create the network
+  wheel <- network.initialize(nrow(indices))
+  
+  # colors for metadata
+  met_colors <- "#0000FF"
+  if (!is.null(metadata))
+    met_colors <- make_colors(metadata)
+  
+  # add edges
+  for (j in 1:ncol(indices))
+  {
+    add.edges.active(
+      wheel, 
+      tail=1:nrow(indices), 
+      head=as.numeric(indices[,j]), 
+      onset=j, terminus=ncol(indices)+1,
+      names.eval = rep(list(list("Time"
+                                 # , "Distance"
+                                 )), nrow(indices)),
+      vals.eval = rep(list(list(j
+                                # , distances[,j]
+                                )), nrow(indices))
+    )
+  }
+  
+  # calculate distance layouts, but with the actual distance
+  network.layout.animate.circle <- function(
+    net, dist.mat = NULL,
+    default.dist = NULL, seed.coords = NULL, layout.par = list(),
+    verbose=FALSE){
+    distances <- sapply(
+      layout.distance(net, default.dist = default.dist), function(x) {
+        max(min_dist, x)
+      }
+    )
+    
+    network.layout.animate.kamadakawai(
+      net, dist.mat = distances,
+      default.dist = NULL, seed.coords = NULL, layout.par = list(),
+      verbose=FALSE)
+  }
+  
+  compute.animation(wheel, animation.mode = "circle",
+                    slice.par=list(start=0, end=ncol(indices), 
+                                   interval=1,
+                                   aggregate.dur=1, rule='any'))
+  
+  mode <- ifelse(instant, 'HTML', 'htmlWidget')
+  
+  knn <- render.d3movie(
+    wheel, 
+    vertex.lwd = 0.5,
+    edge.lwd = 1,
+    vertex.col = met_colors,
+    edge.col = make_grey(wheel %e% "Time"),
+    vertex.tooltip = paste("<b>Name:</b>", 1:nrow(indices) , "<br>",
+                           "<b>Type:</b>", metadata), 
+    # edge.tooltip = paste("<b>Neighbor:</b>", wheel %e% "Time" , "<br>",
+    #                      "<b>Length:</b>", wheel %e% "Distance"), 
+    output.mode=mode
+  )
+  
+  if (!instant)
+    knn$sizingPolicy$defaultWidth = "100%"
+  
+  knn
+}
+
+# ------------
+# ANIMATE DATA
+# ------------
+
+all_data <- my_empty_list(sprintf("Example %s", 1:7))
+
+# Raw data, KNN data, NDTV D3 movies
+for (i in 1:7)
+  all_data[[i]] <- my_empty_list(c("Raw", "KNN", "D3M"))
+
+# EXAMPLE 0
+testflat <- rep(1:100, 100)
+test <- matrix(testflat, nrow=100)
+write.table(test, "data/test.csv", 
+            row.names = FALSE, col.names = FALSE, quote = FALSE)
+
+i0 <- open_result("data/i07_m100_n0000100_k050_i005.txt")
+i0 <- data.frame(matrix(i0, ncol=50, byrow = TRUE))[,1:10]
+d0 <- open_result("data/d07_m100_n0000100_k050_i005.txt")
+d0 <- sqrt(data.frame(matrix(d0, ncol=50, byrow = TRUE))[,1:10])
+
+all_data[[7]][["Raw"]] <- read.csv("data/test.csv", sep=" ", header=FALSE)
+all_data[[7]][["KNN"]] <- make_knn(i0, d0)
+all_data[[7]][["D3M"]] <- make_animation(i0, 10, instant=FALSE)
+
+# EXAMPLE 3
+ed1 <- read.csv("data/entex_data.csv")[,-1]
+write.table(hmm, "~/rann_applications/entex_fin.csv", 
+            row.names = FALSE, col.names = FALSE, quote = FALSE)
+
+i3 <- open_result("data/i07_m010_n0000086_k050_i005.txt")
+i3 <- data.frame(matrix(i3, nrow=86, byrow=TRUE)[,1:10])
+d3 <- open_result("data/d07_m010_n0000086_k050_i005.txt")
+d3 <- data.frame(sqrt(matrix(d3, nrow=86, byrow=TRUE)[,1:10]))
+
+metadata <- read.csv("data/entex_metadata.csv")$TISSUE
+
+all_data[[3]][["Raw"]] <- ed1
+all_data[[3]][["KNN"]] <- make_knn(i3, d3)
+all_data[[3]][["D3M"]] <- make_animation(i3, 0, instant=FALSE, metadata=metadata)
+
+
+
+
+
+
+
+
+
+
+
+all_data[[1]][["KNN"]] <- 
+  all_data[[1]][["D3M"]]
+
+for (i in 3:10)
+  all_data[[1]][["KNN"]][[i]] <- NULL
+
+for (i in 2:6)
+{
+  all_data[[i]] <- all_data[[1]]
+}
+
+saveRDS(all_data, "rann_app/data/all_data.rds")
