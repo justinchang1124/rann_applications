@@ -215,7 +215,6 @@ all_data[[3]][["D3M"]] <- make_animation(i3, 0, instant=FALSE, metadata=m3)
 # EXAMPLE 4
 # EXAMPLE 5
 # EXAMPLE 6
-# EXAMPLE 7
 
 
 
