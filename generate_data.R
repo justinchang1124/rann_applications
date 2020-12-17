@@ -178,15 +178,29 @@ all_data[[7]][["Raw"]] <- read.csv("data/test.csv", sep=" ", header=FALSE)
 all_data[[7]][["KNN"]] <- make_knn(i0, d0)
 all_data[[7]][["D3M"]] <- make_animation(i0, 10, instant=FALSE)
 
+# EXAMPLE 1
+i1 <- open_result("data/i07_m320_n0000344_k010.txt")
+i1 <- data.frame(matrix(i1, nrow=344, byrow=TRUE)[,1:10])
+d1 <- open_result("data/d07_m320_n0000344_k010.txt")
+d1 <- data.frame(matrix(d1, nrow=344, byrow=TRUE)[,1:10])
+m1 <- readLines("data/covid_metadata.txt")
+
+all_data[[1]][["Raw"]] <- read.csv("data/time_series_covid_19_confirmed_US_small.csv",
+                                   sep = ' ', header=FALSE)
+all_data[[1]][["KNN"]] <- make_knn(i1, d1)
+all_data[[1]][["D3M"]] <- make_animation(i1, 0, instant=FALSE, metadata=m1)
+
 # EXAMPLE 2
 i2 <- open_result("data/i07_m30000_n0000100_k010.txt")
 i2 <- data.frame(matrix(i2, nrow=100, byrow=TRUE)[,1:10])
 d2 <- open_result("data/d07_m30000_n0000100_k010.txt")
 d2 <- data.frame(sqrt(matrix(d2, nrow=100, byrow=TRUE)[,1:10]))
 
+m2 <- open_result("data/bird_metadata.txt")
+
 all_data[[2]][["Raw"]] <- NULL
 all_data[[2]][["KNN"]] <- make_knn(i2, d2)
-all_data[[2]][["D3M"]] <- make_animation(i3, 0, instant=FALSE, metadata=metadata)
+all_data[[2]][["D3M"]] <- make_animation(i2, 0, instant=FALSE, metadata=m2)
 
 # EXAMPLE 3
 ed1 <- read.csv("data/entex_data.csv")[,-1]
@@ -198,11 +212,11 @@ i3 <- data.frame(matrix(i3, nrow=86, byrow=TRUE)[,1:10])
 d3 <- open_result("data/d07_m010_n0000086_k050_i005.txt")
 d3 <- data.frame(sqrt(matrix(d3, nrow=86, byrow=TRUE)[,1:10]))
 
-metadata <- read.csv("data/entex_metadata.csv")$TISSUE
+m3 <- read.csv("data/entex_metadata.csv")$TISSUE
 
 all_data[[3]][["Raw"]] <- ed1
 all_data[[3]][["KNN"]] <- make_knn(i3, d3)
-all_data[[3]][["D3M"]] <- make_animation(i3, 0, instant=FALSE, metadata=metadata)
+all_data[[3]][["D3M"]] <- make_animation(i3, 0, instant=FALSE, metadata=m3)
 
 
 
