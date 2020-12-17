@@ -122,6 +122,7 @@ ui <- function(request){
         id = 'plotPanels',
         tabPanel(
           title = "Numbers", 
+          h3("Network Dynamic"),
           uiOutput("example0_out") %>% my_spin(),
           h3("Nearest Neighbors"),
           DT::DTOutput("example0_knn") %>% my_spin(),
@@ -129,7 +130,8 @@ ui <- function(request){
           DT::DTOutput("example0_raw") %>% my_spin()
         ),
         tabPanel(
-          title = "COVID19 (Figure 1)", 
+          title = "COVID19 (Figure 1)",
+          h3("Network Dynamic"),
           uiOutput("example1_out") %>% my_spin(),
           h3("Nearest Neighbors"),
           DT::DTOutput("example1_knn") %>% my_spin(),
@@ -138,6 +140,7 @@ ui <- function(request){
         ),
         tabPanel(
           title = "Birds (Figure 2)", 
+          h3("Network Dynamic"),
           uiOutput("example2_out") %>% my_spin(),
           h3("Nearest Neighbors"),
           DT::DTOutput("example2_knn") %>% my_spin(),
@@ -146,6 +149,7 @@ ui <- function(request){
         ),
         tabPanel(
           title = "Tissue Samples (Figure 3)", 
+          h3("Network Dynamic"),
           uiOutput("example3_out") %>% my_spin(),
           h3("Nearest Neighbors"),
           DT::DTOutput("example3_knn") %>% my_spin(),
@@ -154,6 +158,7 @@ ui <- function(request){
         ),
         tabPanel(
           title = "scRNAseq (Figure 4)", 
+          h3("Network Dynamic"),
           uiOutput("example4_out") %>% my_spin(),
           h3("Nearest Neighbors"),
           DT::DTOutput("example4_knn") %>% my_spin(),
@@ -162,6 +167,7 @@ ui <- function(request){
         ),
         tabPanel(
           title = "Football (Figure 5)", 
+          h3("Network Dynamic"),
           uiOutput("example5_out") %>% my_spin(),
           h3("Nearest Neighbors"),
           DT::DTOutput("example5_knn") %>% my_spin(),
@@ -170,6 +176,7 @@ ui <- function(request){
         ),
         tabPanel(
           title = "NBA Ranking (Figure 6)", 
+          h3("Network Dynamic"),
           uiOutput("example6_out") %>% my_spin(),
           h3("Nearest Neighbors"),
           DT::DTOutput("example6_knn") %>% my_spin(),
