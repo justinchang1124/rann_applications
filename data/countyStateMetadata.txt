@@ -1,0 +1,334 @@
+Autauga, Alabama
+Chilton, Alabama
+Crenshaw, Alabama
+Geneva, Alabama
+Lee, Alabama
+Montgomery, Alabama
+Sumter, Alabama
+Aleutians West, Alaska
+Juneau, Alaska
+Petersburg, Alaska
+, American Samoa
+Navajo, Arizona
+Baxter, Arkansas
+Cleveland, Arkansas
+Faulkner, Arkansas
+Izard, Arkansas
+Lonoke, Arkansas
+Out of AR, Arkansas
+Saline, Arkansas
+Van Buren, Arkansas
+Colusa, California
+Kings, California
+Mono, California
+San Benito, California
+Shasta, California
+Tuolumne, California
+Bent, Colorado
+Delta, Colorado
+Grand, Colorado
+Larimer, Colorado
+Otero, Colorado
+Routt, Colorado
+Yuma, Colorado
+Windham, Connecticut
+Alachua, Florida
+Collier, Florida
+Glades, Florida
+Jackson, Florida
+Marion, Florida
+Palm Beach, Florida
+Sumter, Florida
+Atkinson, Georgia
+Bleckley, Georgia
+Carroll, Georgia
+Clinch, Georgia
+Dawson, Georgia
+Elbert, Georgia
+Glascock, Georgia
+Harris, Georgia
+Jenkins, Georgia
+Lowndes, Georgia
+Monroe, Georgia
+Peach, Georgia
+Richmond, Georgia
+Taliaferro, Georgia
+Troup, Georgia
+Washington, Georgia
+, Grand Princess
+Adams, Idaho
+Butte, Idaho
+Fremont, Idaho
+Lincoln, Idaho
+Teton, Idaho
+Bureau, Illinois
+Cook, Illinois
+Fayette, Illinois
+Henderson, Illinois
+Kankakee, Illinois
+Macoupin, Illinois
+Mercer, Illinois
+Pike, Illinois
+Scott, Illinois
+Warren, Illinois
+Allen, Indiana
+Clinton, Indiana
+Floyd, Indiana
+Hendricks, Indiana
+Knox, Indiana
+Miami, Indiana
+Parke, Indiana
+Scott, Indiana
+Unassigned, Indiana
+Wells, Indiana
+Boone, Iowa
+Cherokee, Iowa
+Delaware, Iowa
+Grundy, Iowa
+Iowa, Iowa
+Louisa, Iowa
+Monroe, Iowa
+Polk, Iowa
+Taylor, Iowa
+Winneshiek, Iowa
+Brown, Kansas
+Comanche, Kansas
+Ellsworth, Kansas
+Greenwood, Kansas
+Kearny, Kansas
+Marion, Kansas
+Neosho, Kansas
+Pratt, Kansas
+Scott, Kansas
+Sumner, Kansas
+Wyandotte, Kansas
+Boyd, Kentucky
+Carlisle, Kentucky
+Daviess, Kentucky
+Garrard, Kentucky
+Hart, Kentucky
+Knott, Kentucky
+Livingston, Kentucky
+McCreary, Kentucky
+Nelson, Kentucky
+Powell, Kentucky
+Taylor, Kentucky
+Whitley, Kentucky
+Bossier, Louisiana
+East Carroll, Louisiana
+LaSalle, Louisiana
+Out of LA, Louisiana
+St. James, Louisiana
+Union, Louisiana
+Aroostook, Maine
+Piscataquis, Maine
+Baltimore City, Maryland
+Howard, Maryland
+Washington, Maryland
+Hampden, Massachusetts
+Alcona, Michigan
+Berrien, Michigan
+Delta, Michigan
+Hillsdale, Michigan
+Kalkaska, Michigan
+Macomb, Michigan
+Montcalm, Michigan
+Otsego, Michigan
+St. Joseph, Michigan
+Beltrami, Minnesota
+Clay, Minnesota
+Freeborn, Minnesota
+Kandiyohi, Minnesota
+Marshall, Minnesota
+Norman, Minnesota
+Red Lake, Minnesota
+Stearns, Minnesota
+Washington, Minnesota
+Benton, Mississippi
+Copiah, Mississippi
+Hinds, Mississippi
+Kemper, Mississippi
+Madison, Mississippi
+Panola, Mississippi
+Simpson, Mississippi
+Union, Mississippi
+Adair, Missouri
+Buchanan, Missouri
+Chariton, Missouri
+Daviess, Missouri
+Harrison, Missouri
+Johnson, Missouri
+Macon, Missouri
+Montgomery, Missouri
+Perry, Missouri
+Ray, Missouri
+St. Clair, Missouri
+Unassigned, Missouri
+Blaine, Montana
+Fallon, Montana
+Judith Basin, Montana
+Musselshell, Montana
+Richland, Montana
+Treasure, Montana
+Blaine, Nebraska
+Chase, Nebraska
+Deuel, Nebraska
+Garden, Nebraska
+Holt, Nebraska
+Lancaster, Nebraska
+Nuckolls, Nebraska
+Richardson, Nebraska
+Stanton, Nebraska
+York, Nebraska
+Lincoln, Nevada
+Belknap, New Hampshire
+Sullivan, New Hampshire
+Hudson, New Jersey
+Somerset, New Jersey
+Curry, New Mexico
+Los Alamos, New Mexico
+San Miguel, New Mexico
+Albany, New York
+Columbia, New York
+Hamilton, New York
+New York, New York
+Putnam, New York
+St. Lawrence, New York
+Wayne, New York
+Beaufort, North Carolina
+Caswell, North Carolina
+Currituck, North Carolina
+Gates, North Carolina
+Hoke, North Carolina
+Madison, North Carolina
+Onslow, North Carolina
+Randolph, North Carolina
+Surry, North Carolina
+Watauga, North Carolina
+Bottineau, North Dakota
+Emmons, North Dakota
+McHenry, North Dakota
+Pembina, North Dakota
+Slope, North Dakota
+Williams, North Dakota
+Butler, Ohio
+Darke, Ohio
+Greene, Ohio
+Huron, Ohio
+Madison, Ohio
+Morrow, Ohio
+Preble, Ohio
+Trumbull, Ohio
+Wood, Ohio
+Canadian, Oklahoma
+Creek, Oklahoma
+Harmon, Oklahoma
+Latimer, Oklahoma
+McIntosh, Oklahoma
+Out of OK, Oklahoma
+Sequoyah, Oklahoma
+Woodward, Oklahoma
+Douglas, Oregon
+Lane, Oregon
+Tillamook, Oregon
+Allegheny, Pennsylvania
+Cameron, Pennsylvania
+Dauphin, Pennsylvania
+Indiana, Pennsylvania
+McKean, Pennsylvania
+Philadelphia, Pennsylvania
+Union, Pennsylvania
+Aguadilla, Puerto Rico
+Caguas, Puerto Rico
+Comerio, Puerto Rico
+Gurabo, Puerto Rico
+Las Marias, Puerto Rico
+Naguabo, Puerto Rico
+Sabana Grande, Puerto Rico
+Unassigned, Puerto Rico
+Newport, Rhode Island
+Barnwell, South Carolina
+Darlington, South Carolina
+Horry, South Carolina
+Newberry, South Carolina
+Union, South Carolina
+Buffalo, South Dakota
+Day, South Dakota
+Hamlin, South Dakota
+Kingsbury, South Dakota
+Miner, South Dakota
+Spink, South Dakota
+Ziebach, South Dakota
+Carter, Tennessee
+DeKalb, Tennessee
+Greene, Tennessee
+Henry, Tennessee
+Lawrence, Tennessee
+McNairy, Tennessee
+Pickett, Tennessee
+Shelby, Tennessee
+Van Buren, Tennessee
+Angelina, Texas
+Bee, Texas
+Briscoe, Texas
+Carson, Texas
+Collin, Texas
+Crockett, Texas
+Dickens, Texas
+Falls, Texas
+Gaines, Texas
+Grimes, Texas
+Hartley, Texas
+Houston, Texas
+Jefferson, Texas
+Kerr, Texas
+Lavaca, Texas
+Lynn, Texas
+Medina, Texas
+Motley, Texas
+Palo Pinto, Texas
+Reagan, Texas
+Sabine, Texas
+Smith, Texas
+Terrell, Texas
+Upton, Texas
+Wharton, Texas
+Yoakum, Texas
+Daggett, Utah
+Morgan, Utah
+Summit, Utah
+Weber-Morgan, Utah
+Orleans, Vermont
+Alexandria, Virginia
+Botetourt, Virginia
+Charlotte, Virginia
+Danville, Virginia
+Fluvanna, Virginia
+Greene, Virginia
+Isle of Wight, Virginia
+Lunenburg, Virginia
+Nelson, Virginia
+Page, Virginia
+Pulaski, Virginia
+Salem, Virginia
+Sussex, Virginia
+Wise, Virginia
+Cowlitz, Washington
+Kitsap, Washington
+Pierce, Washington
+Walla Walla, Washington
+Calhoun, West Virginia
+Harrison, West Virginia
+McDowell, West Virginia
+Pendleton, West Virginia
+Taylor, West Virginia
+Wyoming, West Virginia
+Clark, Wisconsin
+Fond du Lac, Wisconsin
+Kenosha, Wisconsin
+Menominee, Wisconsin
+Polk, Wisconsin
+Sheboygan, Wisconsin
+Waukesha, Wisconsin
+Crook, Wyoming
+Park, Wyoming

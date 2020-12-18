@@ -5,8 +5,8 @@ account: justinchang1124
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 3410577
-bundleId: 3999964
+bundleId: 4006825
 url: https://justinchang1124.shinyapps.io/rann_app/
-when: 1608182629.98722
+when: 1608316126.38541
 asMultiple: FALSE
 asStatic: FALSE
