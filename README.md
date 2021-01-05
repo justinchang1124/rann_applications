@@ -1,6 +1,7 @@
 # RANN Applications
 Authors: Justin Chang, Yasmina Abukhadra, Daniel Ortega, Abhinav Godavarthi, Michael Barresi, Alex Lawson
-# Applying Randomized Approximate Nearest Neighbors to Real-World Problems
+
+# Applying Randomized Approximate Nearest Neighbors
 
 Given n points in Rm, the k-nearest-neighbors algorithm finds the k nearest neighbors of each point on a Euclidean metric. The Randomized Nearest Neighbor Algorithm is similar to the k-nearest neighbors algorithm, but it runs quickly and preserves performance by finding the approximate nearest neighbors instead of the exact neighbors. Additionally, RANN implements several useful results from real analysis, such as the Johnson-Lindenstrauss theorem (Jones, 2011). We first revised the RANN algorithm to accept custom inputs and used R to develop a workflow for visualizing results as dynamic interactive networks (Bender-DeMoll, 2016). 
 
