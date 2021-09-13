@@ -7,7 +7,7 @@ Given n points in Rm, the k-nearest-neighbors algorithm finds the k nearest neig
 
 This project applies RANN to a diverse collection of real-world datasets: bird images from Caltech-UCSD Birds 200 (Welinder, 2010), COVID-19 data from different regions in the US over many time points (“Novel Corona Virus 2019 Dataset," 2020), genomic profiles across human tissue samples (ENCODE, 2012) (Davis, 2018), single cell RNA sequencing data (Shekhar, 2016), and football team performance based on positional and functional data (PFF Premium Stats, 2020) (Pro Football Reference, 2020). Collectively, these analyses demonstrate that RANN is robust, high-performance, and insightful. Through these varied analyses, this project hopes to provide insight into the performance and possible applications of RANN. The selected applications, though not exhaustive, also yield interesting results with respect to grouping altered images amidst noisy perturbations, relating COVID outcomes across the United States, deducing the identity of tissue samples, analyzing novel RNA sequencing data, and predicting season outcomes for football teams (Jones, 2011).
 
-The visualizations for our work can be found at https://justinchang1124.shinyapps.io/rann_app
+The visualizations for our work can be found at https://exploration-tool.shinyapps.io/rann_app
 
 # Works Cited
 
